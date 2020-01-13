@@ -9,4 +9,5 @@ To run it you need to have port 8080 available.
 After starting the server, you can run the python script to test it.
 
 `mvn clean install`
+
 `java -jar ExampleExchange-0.1.jar`
