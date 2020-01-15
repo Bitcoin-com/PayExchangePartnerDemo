@@ -46,10 +46,10 @@ public class QuotingService {
         System.out.println("Stopping quoting service");
     }
 
-    public static Quote createQuote(String currency, BigDecimal fiatAmount, UUID accountId) {
+    public static Quote createQuote(String currency, BigDecimal fiatAmount, String accountNumber) {
 
         Quote quote = new Quote();
-        quote.setAccountId(accountId);
+        quote.setAccountNumber(accountNumber);
 
         // Generate a unique quote id
         quote.setQuoteId(UUID.randomUUID());
@@ -75,7 +75,7 @@ public class QuotingService {
         timeNow.setTime(timeNow.getTime() + 60000); // Add 1 minute from now
         quote.setExpiry(timeNow);
 
-        quote.setStatus(QuoteStatus.ACCEPTED);
+        quote.setStatus(QuoteStatus.OPEN);
 
         // Add to active quotes
         activeQuotes.put(quote.getQuoteId(), quote);
@@ -88,7 +88,7 @@ public class QuotingService {
         System.out.println(quote);
 
         // The quote should only be in the state of ACCEPTED
-        if (!quote.getStatus().equals(QuoteStatus.ACCEPTED)) {
+        if (!quote.getStatus().equals(QuoteStatus.OPEN)) {
             throw new InvalidPaymentException("Quote not open, currently in state " + quote.getStatus());
         }
 
@@ -125,13 +125,14 @@ public class QuotingService {
         // Broadcast transaction
         try {
             BitcoinWalletService.broadcastTransaction(tx);
+            quote.setStatus(QuoteStatus.PAID);
         } catch (BitcoinRpcException e) {
             throw new InvalidPaymentException(e.getMessage());
         }
 
         // Put code for updating database here if the transaction was accepted by the node
         // *Database stuff*
-        AccountService.creditAccount(quote.getAccountId(), quote.getFiatCounter(), quote.getFiatAmount());
+        AccountService.creditAccount(quote.getAccountNumber(), quote.getFiatCounter(), quote.getFiatAmount());
     }
 
     public static HashMap<UUID, Quote> getActiveQuotes() {

@@ -253,18 +253,41 @@
 <h1 id='quote-flow'>Quote flow</h1><h2 id='get-quote'>Get quote</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">api_key</span> <span class="o">=</span> <span class="s">"dF7z7xskE17aYBUAm5T7F1x8esRpMFJP"</span>
-
-<span class="n">quote_request_2</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">"fiatAmount"</span><span class="p">:</span> <span class="s">"80"</span><span class="p">,</span>
-  <span class="s">"currency"</span><span class="p">:</span> <span class="s">"USD"</span><span class="p">,</span>
+<span class="n">quote_request_example_1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
+  <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"EUR"</span><span class="p">,</span>
+  <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"80"</span><span class="p">,</span>
   <span class="s">"destAccount"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s">"type"</span><span class="p">:</span> <span class="s">"EXCHANGE"</span><span class="p">,</span>
-    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"b3cffad0-b510-44da-80db-195c9b7c1ae3"</span><span class="p">,</span>
+    <span class="s">"type"</span><span class="p">:</span> <span class="s">"BANK"</span><span class="p">,</span>
+    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"GB05REVO00990183264583"</span><span class="p">,</span>
+    <span class="s">"routingNumber"</span><span class="p">:</span> <span class="s">"REVOGB21"</span><span class="p">,</span>
+    <span class="s">"accountHolder"</span><span class="p">:</span> <span class="s">"SATOSHI NAKAMOTO"</span><span class="p">,</span>
+    <span class="s">"country"</span><span class="p">:</span> <span class="s">"GB"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/get-quote'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">quote_request_2</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">quote_request_example_2</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
+  <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"USD"</span><span class="p">,</span>
+  <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"80"</span><span class="p">,</span>
+  <span class="s">"destAccount"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"type"</span><span class="p">:</span> <span class="s">"EXCHANGE"</span><span class="p">,</span>
+    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"000736353815183"</span><span class="p">,</span>
+    <span class="s">"routingNumber"</span><span class="p">:</span> <span class="s">"LIQUIDCOM"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">quote_request_example_3</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
+  <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"USDH"</span><span class="p">,</span>
+  <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"50"</span><span class="p">,</span>
+  <span class="s">"destAccount"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"type"</span><span class="p">:</span> <span class="s">"SLP"</span><span class="p">,</span>
+    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"qpxjh5nru6u2sfcg9zwddcu8zpmjwlmzlcsnpq5jye"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/get-quote'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">quote_request_example_2</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre>
 <blockquote>
@@ -284,7 +307,7 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"DENIED"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"reason"</span><span class="p">:</span><span class="s2">"Minimum quote amount not met|Invalid FIAT currency|Invalid destination account"</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="s2">"Minimum quote amount not met|Invalid FIAT currency|Invalid destination account|Destination account not eligible"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint is for getting a quote from the exchange. The merchant is expecting an exact amount of USD to be credited to their account. The Pay server will send a quote request to the exchange on how many BCH the exchange wants for $80. The exchange may choose to markup the price to mitigate market risks.</p>

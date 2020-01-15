@@ -30,11 +30,11 @@ public class DebugEndpoints {
     }
 
     @RequestMapping(value = "/api/get-accounts", method = RequestMethod.GET)
-    public ResponseEntity<HashMap<UUID, HashMap<String, BigDecimal>>> accountListRequest(){
+    public ResponseEntity<HashMap<String, HashMap<String, BigDecimal>>> accountListRequest(){
 
         System.out.println("List all active quotes");
-        HashMap<UUID, HashMap<String, BigDecimal>> allAccounts = AccountService.getAllAccounts();
+        HashMap<String, HashMap<String, BigDecimal>> allAccounts = AccountService.getAllAccounts();
 
-        return new ResponseEntity<HashMap<UUID, HashMap<String, BigDecimal>>>(allAccounts, HttpStatus.OK);
+        return new ResponseEntity<HashMap<String, HashMap<String, BigDecimal>>>(allAccounts, HttpStatus.OK);
     }
 }

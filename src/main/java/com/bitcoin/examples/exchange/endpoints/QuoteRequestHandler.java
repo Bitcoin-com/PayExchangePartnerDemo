@@ -31,10 +31,10 @@ public class QuoteRequestHandler {
             return new ResponseEntity<QuoteResponse>(new QuoteResponse(), HttpStatus.BAD_REQUEST);
         }
 
-        UUID accountId = UUID.fromString(paymentRequestCall.getDestAccount().getAccountNumber());
+        String accountNumber = paymentRequestCall.getDestAccount().getAccountNumber();
 
         // Build the quote response object
-        QuoteResponse response = new QuoteResponse(QuotingService.createQuote(paymentRequestCall.getCurrency(), paymentRequestCall.getFiatAmount(), accountId));
+        QuoteResponse response = new QuoteResponse(QuotingService.createQuote(paymentRequestCall.getOutputAsset(), paymentRequestCall.getOutputAmount(), accountNumber));
 
         return new ResponseEntity<QuoteResponse>(response, HttpStatus.OK);
     }

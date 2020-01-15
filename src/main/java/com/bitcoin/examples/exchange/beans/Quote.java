@@ -23,7 +23,8 @@ public class Quote implements Serializable {
     private BigDecimal amount;
     private String fiatCounter;
     private BigDecimal fiatAmount;
-    private UUID accountId;
+    private String accountNumber;
+    private BigDecimal rate;
 
     public void setExpiry(Date expiry) {
         this.expiry = expiry;
@@ -32,7 +33,7 @@ public class Quote implements Serializable {
             public void run(){
                 try {
                     Thread.sleep(sleepTime);
-                    if (status.equals(QuoteStatus.ACCEPTED)) {
+                    if (status.equals(QuoteStatus.OPEN)) {
                         status = QuoteStatus.EXPIRED;
                         System.out.println("Quote " + quoteId + " have expired");
                     }

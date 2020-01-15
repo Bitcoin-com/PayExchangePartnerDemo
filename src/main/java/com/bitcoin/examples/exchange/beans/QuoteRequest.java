@@ -12,9 +12,9 @@ import java.util.Map;
 @ToString
 public class QuoteRequest {
 
-    private String apiKey;
-    private BigDecimal fiatAmount;
-    private String currency;
+    private String inputAsset;
+    private BigDecimal outputAmount;
+    private String outputAsset;
     private DestinationAccount destAccount;
 
     @Getter

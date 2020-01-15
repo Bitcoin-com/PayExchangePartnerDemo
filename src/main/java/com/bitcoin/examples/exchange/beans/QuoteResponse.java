@@ -3,6 +3,7 @@ package com.bitcoin.examples.exchange.beans;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
@@ -18,6 +19,7 @@ public class QuoteResponse {
     private boolean directBroadcast;
     private String address;
     private long amount;
+    private BigDecimal rate;
 
     public QuoteResponse(Quote quote) {
         this.status = quote.getStatus().toString();
