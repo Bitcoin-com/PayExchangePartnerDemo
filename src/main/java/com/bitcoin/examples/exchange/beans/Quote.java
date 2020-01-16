@@ -1,5 +1,6 @@
 package com.bitcoin.examples.exchange.beans;
 
+import com.bitcoin.examples.exchange.enums.AssetType;
 import com.bitcoin.examples.exchange.enums.QuoteStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class Quote implements Serializable {
     private BigDecimal amount;
     private String fiatCounter;
     private BigDecimal fiatAmount;
+    private AssetType assetType;
     private String accountNumber;
     private BigDecimal rate;
 

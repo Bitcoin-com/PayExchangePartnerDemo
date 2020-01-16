@@ -1,6 +1,7 @@
 package com.bitcoin.examples.exchange.services;
 
 import com.bitcoin.examples.exchange.beans.Quote;
+import com.bitcoin.examples.exchange.enums.AssetType;
 import com.bitcoin.examples.exchange.enums.QuoteStatus;
 import com.bitcoin.examples.exchange.exceptions.BitcoinRpcException;
 import com.bitcoin.examples.exchange.exceptions.InvalidPaymentException;
@@ -69,10 +70,12 @@ public class QuotingService {
         quote.setAddress(depositAddress);
         quote.setFiatCounter(currency);
         quote.setFiatAmount(fiatAmount);
+        quote.setRate(rate);
+        quote.setAssetType(AssetType.FIAT);
 
         // Set an expiry time
         Date timeNow = new Date();
-        timeNow.setTime(timeNow.getTime() + 60000); // Add 1 minute from now
+        timeNow.setTime(timeNow.getTime() + 600000); // Add 10 minutes from now
         quote.setExpiry(timeNow);
 
         quote.setStatus(QuoteStatus.OPEN);

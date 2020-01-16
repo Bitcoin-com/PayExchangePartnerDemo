@@ -20,6 +20,12 @@ public class QuoteResponse {
     private String address;
     private long amount;
     private BigDecimal rate;
+    private String payoutAsset;
+    private String payoutAssetType;
+    private String payoutAssetId;
+    private BigDecimal payoutAmount;
+    private String outputAccount;
+    private String routingNumber;
 
     public QuoteResponse(Quote quote) {
         this.status = quote.getStatus().toString();
@@ -32,6 +38,10 @@ public class QuoteResponse {
         this.directBroadcast = true;
         this.address = quote.getAddress().toString();
         this.amount = quote.getAmount().movePointRight(8).longValue();
+        this.payoutAsset = quote.getFiatCounter();
+        this.payoutAmount = quote.getFiatAmount();
+        this.outputAccount = quote.getAccountNumber();
+        this.payoutAssetType = quote.getAssetType().toString();
     }
 
     // Default object

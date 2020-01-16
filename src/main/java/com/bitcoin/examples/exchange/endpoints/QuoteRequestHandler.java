@@ -35,6 +35,7 @@ public class QuoteRequestHandler {
 
         // Build the quote response object
         QuoteResponse response = new QuoteResponse(QuotingService.createQuote(paymentRequestCall.getOutputAsset(), paymentRequestCall.getOutputAmount(), accountNumber));
+        response.setOutputAccount(accountNumber);
 
         return new ResponseEntity<QuoteResponse>(response, HttpStatus.OK);
     }
