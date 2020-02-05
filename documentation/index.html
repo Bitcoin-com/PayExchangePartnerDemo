@@ -222,16 +222,16 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#quote-flow" class="toc-h1 toc-link" data-title="Quote flow">Quote flow</a>
+            <a href="#offer-flow" class="toc-h1 toc-link" data-title="Offer flow">Offer flow</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-quote" class="toc-h2 toc-link" data-title="Get quote">Get quote</a>
+                    <a href="#request-offer" class="toc-h2 toc-link" data-title="Request offer">Request offer</a>
                   </li>
                   <li>
-                    <a href="#accept-quote" class="toc-h2 toc-link" data-title="Accept quote">Accept quote</a>
+                    <a href="#accept-offer" class="toc-h2 toc-link" data-title="Accept offer">Accept offer</a>
                   </li>
                   <li>
-                    <a href="#get-quote-status" class="toc-h2 toc-link" data-title="Get quote status">Get quote status</a>
+                    <a href="#get-offer-status" class="toc-h2 toc-link" data-title="Get offer status">Get offer status</a>
                   </li>
               </ul>
           </li>
@@ -250,10 +250,10 @@
 <p>Bitcoin.com Example Server API documentation.</p>
 
 <p><code><img src="images/flow-3b8b22fe.png" /></code></p>
-<h1 id='quote-flow'>Quote flow</h1><h2 id='get-quote'>Get quote</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='offer-flow'>Offer flow</h1><h2 id='request-offer'>Request offer</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">quote_request_example_1</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">offer_request_example_1</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
   <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"EUR"</span><span class="p">,</span>
   <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"80"</span><span class="p">,</span>
@@ -266,7 +266,7 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">quote_request_example_2</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">offer_request_example_2</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
   <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"USD"</span><span class="p">,</span>
   <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"80"</span><span class="p">,</span>
@@ -277,17 +277,18 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">quote_request_example_3</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">offer_request_example_3</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">"inputAsset"</span><span class="p">:</span> <span class="s">"BCH"</span><span class="p">,</span>
   <span class="s">"outputAsset"</span><span class="p">:</span> <span class="s">"USDH"</span><span class="p">,</span>
   <span class="s">"outputAmount"</span><span class="p">:</span> <span class="s">"50"</span><span class="p">,</span>
   <span class="s">"destAccount"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s">"type"</span><span class="p">:</span> <span class="s">"SLP"</span><span class="p">,</span>
-    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"qpxjh5nru6u2sfcg9zwddcu8zpmjwlmzlcsnpq5jye"</span>
+    <span class="s">"accountNumber"</span><span class="p">:</span> <span class="s">"qpxjh5nru6u2sfcg9zwddcu8zpmjwlmzlcsnpq5jye"</span><span class="p">,</span>
+    <span class="s">"routingNumber"</span><span class="p">:</span> <span class="s">"BITCOINCASH"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/get-quote'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">quote_request_example_2</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/v1/request-offer'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">offer_request_example_2</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre>
 <blockquote>
@@ -295,7 +296,7 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"ACCEPTED"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"quoteId"</span><span class="p">:</span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"offerId"</span><span class="p">:</span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expiry"</span><span class="p">:</span><span class="s2">"2020-01-13T02:31Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"directBroadcast"</span><span class="p">:</span><span class="err">True</span><span class="p">,</span><span class="w">
     </span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"1NU99mbAzvvXxg2UxcDhvNEQsRRZxEYz7M"</span><span class="p">,</span><span class="w">
@@ -307,12 +308,12 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"DENIED"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"reason"</span><span class="p">:</span><span class="s2">"Minimum quote amount not met|Invalid FIAT currency|Invalid destination account|Destination account not eligible"</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="s2">"Minimum offer amount not met|Invalid FIAT currency|Invalid destination account|Destination account not eligible"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint is for getting a quote from the exchange. The merchant is expecting an exact amount of USD to be credited to their account. The Pay server will send a quote request to the exchange on how many BCH the exchange wants for $80. The exchange may choose to markup the price to mitigate market risks.</p>
+<p>This endpoint is for getting a offer from the exchange. The merchant is expecting an exact amount of USD to be credited to their account. The Pay server will send a offer request to the exchange on how many BCH the exchange wants for $80. The exchange may choose to markup the price to mitigate market risks.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://exampleexchange.com/api/get-quote</code></p>
+<p><code>POST https://exampleexchange.com/api/v1/request-offer</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -323,28 +324,28 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>apiKey</td>
-<td>string</td>
-<td>false</td>
-<td>Not technicalluy required, but recommended</td>
-</tr>
-<tr>
-<td>fiatAmount</td>
-<td>decimal</td>
-<td>true</td>
-<td>Amnount in FIAT with decimals, 20.5 USD</td>
-</tr>
-<tr>
-<td>currency</td>
+<td>inputAsset</td>
 <td>string</td>
 <td>true</td>
-<td>Fiat code in all caps. USD, EUR, JPY, etc</td>
+<td>Asset to be sent.</td>
+</tr>
+<tr>
+<td>outputAsset</td>
+<td>string</td>
+<td>true</td>
+<td>Asset to receive, FIAT or crypto.</td>
+</tr>
+<tr>
+<td>outputAmount</td>
+<td>string</td>
+<td>true</td>
+<td>Amount of the output asset. FIAT or crypto.</td>
 </tr>
 <tr>
 <td>destAccount</td>
 <td>JSON</td>
 <td>true</td>
-<td>JSON object describing where the fiat money will be sent.</td>
+<td>JSON object describing where the output asset will be sent.</td>
 </tr>
 </tbody></table>
 <h4 id='destaccount-description'>destAccount description</h4>
@@ -378,7 +379,7 @@
 <tr>
 <td>accountHolderAddress</td>
 <td>false</td>
-<td>Useful if paying to IBAN.</td>
+<td>Postal address of account holder. Useful if paying to IBAN.</td>
 </tr>
 <tr>
 <td>routingNumber</td>
@@ -386,16 +387,16 @@
 <td>BIC code or sort code. Useful if paying to IBAN.</td>
 </tr>
 </tbody></table>
-<h2 id='accept-quote'>Accept quote</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='accept-offer'>Accept offer</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">raw_transaction</span> <span class="o">=</span> <span class="s">"0100000019cdd32...889f679c4c8"</span>
 
-<span class="n">quote_acceptance</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"quoteId"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"quoteId"</span><span class="p">],</span>
+<span class="n">offer_acceptance</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"offerId"</span><span class="p">:</span> <span class="s">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span>
     <span class="s">"rawTx"</span><span class="p">:</span> <span class="n">raw_transaction</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/accept-quote'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">quote_acceptance</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/v1/accept-offer'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">offer_acceptance</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre>
 <blockquote>
@@ -403,7 +404,7 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCEPTED"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"quoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"offerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ok"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb52a5b4c80751f01bac8601184cdcc9bd2daa739a18d39caeb275cfb3521c2"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -413,13 +414,13 @@
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
     </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"REJECTED"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Transaction not accepted by bitcoin node|Payment was less than expected|Paid more than expected|Quote has timed out"</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"Transaction not accepted by bitcoin node|Payment was less than expected|Paid more than expected|Offer has timed out"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint is for when Pay server sends the raw transaction to the exchange. The exchange will review the transaction and accept or reject it.
 After the server replied with ACCEPTED and a txid, the transaction is broadcasted to the network.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST https://exampleexchange.com/api/accept-quote</code></p>
+<p><code>POST https://exampleexchange.com/api/accept-offer</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -430,10 +431,10 @@ After the server replied with ACCEPTED and a txid, the transaction is broadcaste
 </tr>
 </thead><tbody>
 <tr>
-<td>quoteId</td>
+<td>offerId</td>
 <td>string (UUID)</td>
 <td>true</td>
-<td>Unique UUID of the quote</td>
+<td>Unique UUID of the offer</td>
 </tr>
 <tr>
 <td>rawTx</td>
@@ -442,10 +443,10 @@ After the server replied with ACCEPTED and a txid, the transaction is broadcaste
 <td>Signed raw transaction as hex</td>
 </tr>
 </tbody></table>
-<h2 id='get-quote-status'>Get quote status</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='get-offer-status'>Get offer status</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/quote/{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quote_id</span><span class="p">),</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://exampleexchange.com/api/v1/offer/{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">offer_id</span><span class="p">),</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'X-API-Key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre>
 <blockquote>
@@ -453,18 +454,18 @@ After the server replied with ACCEPTED and a txid, the transaction is broadcaste
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"quoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"offerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f69ea2e5-015a-4211-96b3-cab996131296"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578882697196</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1NU99mbAzvvXxg2UxcDhvNEQsRRZxEYz7M"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fiatCounter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fiatAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b3cffad0-b510-44da-80db-195c9b7c1ae3"</span><span class="w">
+  </span><span class="s2">"depositAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1NU99mbAzvvXxg2UxcDhvNEQsRRZxEYz7M"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"inputAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BCH"</span><span class="w">
+  </span><span class="s2">"inputAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"outputAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"outputAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint gets a specific quote</p>
+<p>This endpoint gets a specific offer</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET https://exampleexchange.com/api/quote/&lt;ID&gt;</code></p>
+<p><code>GET https://exampleexchange.com/api/offer/&lt;ID&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -474,7 +475,7 @@ After the server replied with ACCEPTED and a txid, the transaction is broadcaste
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the quote</td>
+<td>The ID of the offer</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>

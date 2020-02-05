@@ -42,6 +42,7 @@ public class QuoteResponse {
         this.payoutAmount = quote.getFiatAmount();
         this.outputAccount = quote.getAccountNumber();
         this.payoutAssetType = quote.getAssetType().toString();
+        this.rate = quote.getRate();
     }
 
     // Default object
